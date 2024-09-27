@@ -7,7 +7,6 @@ import numpy as np
 from collections import Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# Download NLTK tokenizer models
 nltk.download('punkt')
 
 class DistilBERTSummarizer:
@@ -56,7 +55,6 @@ class DistilBERTSummarizer:
             inputs = self.tokenize_text(sentence)
             with torch.no_grad():
                 outputs = self.model(**inputs)
-                # Take the mean of the last hidden states to get sentence embeddings
                 embeddings.append(outputs.last_hidden_state.mean(dim=1).cpu().numpy())
         return np.vstack(embeddings)
 
@@ -74,31 +72,24 @@ class DistilBERTSummarizer:
         """
         Generate a summary by selecting the top N sentences based on keyword relevance and sentence embeddings.
         """
-        # Tokenize the text into sentences
         sentences = nltk.sent_tokenize(text)
 
-        # Generate sentence embeddings
         sentence_embeddings = self.get_sentence_embeddings(sentences)
 
-        # Extract keywords to guide the summarization
         keywords = self.extract_keywords(text)
 
-        # Rank sentences based on the presence of keywords
         sentence_scores = np.zeros(len(sentences))
         for idx, sentence in enumerate(sentences):
             for keyword in keywords:
                 if keyword.lower() in sentence.lower():
                     sentence_scores[idx] += 1
 
-        # Combine sentence similarity scores and keyword-based ranking
         doc_embedding = np.mean(sentence_embeddings, axis=0).reshape(1, -1)
         similarity_scores = cosine_similarity(sentence_embeddings, doc_embedding).flatten()
         combined_scores = sentence_scores + similarity_scores
 
-        # Rank the sentences by their combined score
         ranked_sentences_idx = np.argsort(combined_scores)[::-1]
 
-        # Select the top N sentences for the summary
         top_sentence_indices = sorted(ranked_sentences_idx[:num_sentences])
 
         summary = ' '.join([sentences[i] for i in top_sentence_indices])
@@ -124,7 +115,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
@@ -153,7 +143,6 @@ Ms Teets found that a third of local officials would quit if they had the chance
     try:
         summarizer = DistilBERTSummarizer(model_name="distilbert-base-uncased")
 
-        # Generate the summary
         combined_summary = summarizer.summarize_text(article_text, num_sentences=5)
         print("Generated Summary:")
         print(combined_summary)

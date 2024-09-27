@@ -21,7 +21,7 @@ class FineTunedTextSummarizer:
             logging.info(f"Loading model {self.model_name} on {self.device}...")
             tokenizer = T5Tokenizer.from_pretrained(self.model_name)
             model = T5ForConditionalGeneration.from_pretrained(self.model_name).to(self.device)
-            model.eval()  # Set model to evaluation mode
+            model.eval()
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
         except Exception as e:
@@ -40,8 +40,7 @@ class FineTunedTextSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Prepend 'summarize:' to the text, as T5 is trained with task-specific prefixes
-        # Adding guidance to highlight specific concerns such as consumer confidence and policymaking.
+
         logging.info("Tokenizing input text for summarization.")
         input_text = "summarize: Focus on consumer confidence and policymaking issues. " + text
         inputs = self.tokenizer.encode(input_text, return_tensors="pt", truncation=True, max_length=512).to(self.device)
@@ -50,9 +49,9 @@ class FineTunedTextSummarizer:
         summary_ids = self.model.generate(
             inputs,
             max_length=max_length,
-            min_length=min_length,  # Increase min_length to ensure important points are covered
-            length_penalty=1.0,  # Reduce the penalty to allow more detailed output
-            num_beams=6,  # Increase beam search for more exploration
+            min_length=min_length,
+            length_penalty=1.0,
+            num_beams=6,
             early_stopping=True
         )
 
@@ -79,7 +78,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.

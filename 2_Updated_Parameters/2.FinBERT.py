@@ -26,7 +26,7 @@ class FinBERTSummarizer:
             logging.info(f"Loading model {self.model_name} on {self.device}...")
             tokenizer = BertTokenizer.from_pretrained(self.model_name)
             model = BertForSequenceClassification.from_pretrained(self.model_name).to(self.device)
-            model.eval()  # Set model to evaluation mode
+            model.eval()
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
         except Exception as e:
@@ -42,8 +42,7 @@ class FinBERTSummarizer:
         inputs = self.tokenizer([text], return_tensors="pt", truncation=False).to(self.device)
         token_ids = inputs['input_ids'][0]
 
-        # Split token_ids into smaller chunks
-        chunks = torch.split(token_ids, self.chunk_size - 10)  # Reserve 10 tokens for special tokens
+        chunks = torch.split(token_ids, self.chunk_size - 10)
         return [self.tokenizer.decode(chunk, skip_special_tokens=True) for chunk in chunks]
 
     def analyze_sentiment(self, text: str) -> str:
@@ -56,7 +55,6 @@ class FinBERTSummarizer:
         outputs = self.model(**inputs)
         sentiment = torch.argmax(outputs.logits, dim=1).item()
 
-        # Return sentiment label for the entire summary
         sentiment_label = ["Neutral", "Positive", "Negative"][sentiment]
         print(f"Overall Sentiment of the summary: {sentiment_label}")
         return sentiment_label
@@ -69,13 +67,10 @@ class FinBERTSummarizer:
         """
         selected_chunks = []
         for chunk in chunks:
-            # For summarization, we focus on text content without chunk-based sentiment filtering
             selected_chunks.append(chunk)
 
-        # Combine all selected chunks for final summary and truncate it to the max_summary_length
         combined_summary = " ".join(selected_chunks).strip()
 
-        # Truncate the summary to the specified max length
         return self.truncate_summary(combined_summary)
 
     def truncate_summary(self, summary: str) -> str:
@@ -100,7 +95,6 @@ class FinBERTSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Chunk the input text
         chunks = self.chunk_text(text)
 
         logging.info(f"Text split into {len(chunks)} chunks for summarization.")
@@ -115,12 +109,10 @@ class FinBERTSummarizer:
         :param text: The input text to summarize and analyze.
         :return: The overall sentiment of the summary.
         """
-        # First, summarize the text
         summary = self.summarize_text(text)
         print("\nGenerated Summary:")
         print(summary)
 
-        # Then, analyze the sentiment of the entire summary
         sentiment = self.analyze_sentiment(summary)
         return sentiment
 
@@ -143,7 +135,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
@@ -173,7 +164,6 @@ Ms Teets found that a third of local officials would quit if they had the chance
     try:
         summarizer = FinBERTSummarizer(model_name="yiyanghkust/finbert-tone", max_summary_length=100)
 
-        # Generate the summary and analyze the overall sentiment
         overall_sentiment = summarizer.summarize_and_analyze(article_text)
         print(f"\nOverall Sentiment of the Summary: {overall_sentiment}")
 

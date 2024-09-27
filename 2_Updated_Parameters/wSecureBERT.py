@@ -23,7 +23,7 @@ class SecureBERTSummarizer:
             logging.info(f"Loading model {self.model_name} on {self.device}...")
             tokenizer = RobertaTokenizer.from_pretrained(self.model_name)
             model = RobertaForMaskedLM.from_pretrained(self.model_name).to(self.device)
-            model.eval()  # Set model to evaluation mode
+            model.eval()
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
         except Exception as e:
@@ -40,8 +40,7 @@ class SecureBERTSummarizer:
         inputs = self.tokenizer([text], return_tensors="pt", truncation=False).to(self.device)
         token_ids = inputs['input_ids'][0]
 
-        # Ensure the chunk size is within the limit, accounting for special tokens
-        max_chunk_size = self.chunk_size - 10  # Reserve 10 tokens for special tokens
+        max_chunk_size = self.chunk_size - 10
         chunks = torch.split(token_ids, max_chunk_size)
 
         return [self.tokenizer.decode(chunk, skip_special_tokens=True) for chunk in chunks]
@@ -63,15 +62,13 @@ class SecureBERTSummarizer:
                 [prompt_text],
                 return_tensors="pt",
                 truncation=True,
-                max_length=self.chunk_size  # Ensure chunk size is within the token limit
+                max_length=self.chunk_size
             ).to(self.device)
 
-            # Mask some tokens in the input to simulate summarization
             input_ids = inputs['input_ids']
-            masked_indices = torch.randint(1, input_ids.size(1) - 1, (input_ids.size(0) // 5,))  # Randomly mask ~20% tokens
+            masked_indices = torch.randint(1, input_ids.size(1) - 1, (input_ids.size(0) // 5,))
             input_ids[0, masked_indices] = self.tokenizer.mask_token_id
 
-            # Generate output using masked language modeling
             with torch.no_grad():
                 outputs = self.model(input_ids)
                 predictions = torch.argmax(outputs.logits, dim=-1)
@@ -79,7 +76,6 @@ class SecureBERTSummarizer:
 
             summaries.append(summary)
 
-        # Combine all chunk summaries
         return " ".join(summaries).strip()
 
     def summarize_text(self, text: str, combined_prompt: str = "", max_length: int = 150, min_length: int = 50) -> str:
@@ -96,7 +92,6 @@ class SecureBERTSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Chunk the input text if it's too long
         chunks = self.chunk_text(text)
 
         logging.info(f"Text split into {len(chunks)} chunks for summarization.")
@@ -124,7 +119,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
@@ -153,12 +147,10 @@ Ms Teets found that a third of local officials would quit if they had the chance
     try:
         summarizer = SecureBERTSummarizer(model_name="ehsanaghaei/SecureBERT")
 
-        # Combined prompt for a cumulative summary
         combined_prompt = (
             "Provide a secure-oriented summary of the text."
         )
 
-        # Generate the cumulative summary based on all prompts
         combined_summary = summarizer.summarize_text(article_text, combined_prompt=combined_prompt)
         print("Generated Cumulative Summary:")
         print(combined_summary)

@@ -24,7 +24,7 @@ class BARTSummarizer:
             logging.info(f"Loading model {self.model_name} on {self.device}...")
             tokenizer = BartTokenizer.from_pretrained(self.model_name)
             model = BartForConditionalGeneration.from_pretrained(self.model_name).to(self.device)
-            model.eval()  # Set model to evaluation mode
+            model.eval()
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
         except Exception as e:
@@ -40,8 +40,7 @@ class BARTSummarizer:
         inputs = self.tokenizer([text], return_tensors="pt", truncation=False).to(self.device)
         token_ids = inputs['input_ids'][0]
 
-        # Split token_ids into smaller chunks
-        chunks = torch.split(token_ids, self.chunk_size - 10)  # Reserve 10 tokens for special tokens
+        chunks = torch.split(token_ids, self.chunk_size - 10)
         return [self.tokenizer.decode(chunk, skip_special_tokens=True) for chunk in chunks]
 
     def summarize_chunks(self, chunks: list, max_length: int = 350, min_length: int = 150) -> str:
@@ -58,23 +57,22 @@ class BARTSummarizer:
                 [chunk],
                 return_tensors="pt",
                 truncation=True,
-                max_length=self.chunk_size  # Make sure each chunk is within the token limit
+                max_length=self.chunk_size
             ).to(self.device)
 
             summary_ids = self.model.generate(
                 inputs['input_ids'],
                 max_length=max_length,
                 min_length=min_length,
-                length_penalty=2.5,  # Encourage more focused summaries by penalizing random sentences
-                repetition_penalty=2.0,  # Avoid repetition of the same information
-                num_beams=6,  # Increase beam search for better selection of coherent sentences
+                length_penalty=2.5,
+                repetition_penalty=2.0,
+                num_beams=6,
                 early_stopping=True
             )
 
             summary = self.tokenizer.decode(summary_ids[0], skip_special_tokens=True)
             summaries.append(summary)
 
-        # Combine all chunk summaries
         return " ".join(summaries).strip()
 
     def summarize_text(self, text: str, max_length: int = 350, min_length: int = 150) -> str:
@@ -90,7 +88,6 @@ class BARTSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Chunk the input text if it's too long
         chunks = self.chunk_text(text)
 
         logging.info(f"Text split into {len(chunks)} chunks for summarization.")
@@ -118,7 +115,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
@@ -147,7 +143,6 @@ Ms Teets found that a third of local officials would quit if they had the chance
     try:
         summarizer = BARTSummarizer(model_name="facebook/bart-large-cnn")
 
-        # Generate the cumulative summary without prompts
         combined_summary = summarizer.summarize_text(article_text)
         print("Generated Cumulative Summary:")
         print(combined_summary)

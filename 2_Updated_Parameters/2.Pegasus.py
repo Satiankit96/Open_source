@@ -4,7 +4,6 @@ import torch
 import re
 from nltk.corpus import stopwords
 
-# Enable GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class TextSummarizer:
@@ -15,8 +14,8 @@ class TextSummarizer:
         """
         self.model_name = model_name
         self.model, self.tokenizer = self.load_model_and_tokenizer()
-        self.model.to(device)  # Move model to GPU if available
-        self.stop_words = set(stopwords.words('english'))  # Stopwords for cleaning
+        self.model.to(device)
+        self.stop_words = set(stopwords.words('english'))
 
     def load_model_and_tokenizer(self):
         """
@@ -41,13 +40,12 @@ class TextSummarizer:
         """
         logging.info("Cleaning summary to remove filler words...")
         filler_phrases = [
-            r'\b(for more than a decade|as a consequence|writes [\w\s]+,)\b',  # Example fillers
+            r'\b(for more than a decade|as a consequence|writes [\w\s]+,)\b',
             r'\b(according to [\w\s]+|in the opinion of)\b'
         ]
         for phrase in filler_phrases:
             summary = re.sub(phrase, '', summary)
 
-        # Remove excessive whitespace
         summary = re.sub(r'\s+', ' ', summary).strip()
         return summary
 
@@ -63,7 +61,6 @@ class TextSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Tokenize and summarize the text
         logging.info("Tokenizing input text for summarization.")
         inputs = self.tokenizer(text, truncation=True, padding="longest", return_tensors="pt").to(device)
 
@@ -72,9 +69,9 @@ class TextSummarizer:
             inputs['input_ids'],
             max_length=max_length,
             min_length=min_length,
-            length_penalty=2.0,  # Slightly lower penalty to allow for more coverage
-            num_beams=5,  # Increased beam search for more diversity
-            no_repeat_ngram_size=3,  # Avoid repetition of key phrases
+            length_penalty=2.0,
+            num_beams=5,
+            no_repeat_ngram_size=3,
             early_stopping=True
         )
 
@@ -104,7 +101,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage: single article summarization
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.

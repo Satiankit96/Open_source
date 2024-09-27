@@ -10,11 +10,10 @@ class TinyLlamaSummarizer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         print(f"Using device: {self.device}")
 
-        # Load the tokenizer and model from the Hugging Face model hub
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
         self.model.to(self.device)
-        self.model.eval()  # Set the model to evaluation mode
+        self.model.eval()
 
     def summarize_text(self, text, max_new_tokens=150, min_length=30):
         """
@@ -27,30 +26,26 @@ class TinyLlamaSummarizer:
         if not isinstance(text, str) or len(text.strip()) == 0:
             raise ValueError("Input text must be a non-empty string.")
 
-        # Prepare the input for summarization
         input_text = f"Summarize the following article:\n\n{text.strip()}\n\nSummary:"
         inputs = self.tokenizer.encode(input_text, return_tensors="pt", truncation=True, max_length=2048)
         inputs = inputs.to(self.device)
 
-        # Generate the summary with adjusted parameters
         summary_ids = self.model.generate(
             inputs,
             max_new_tokens=max_new_tokens,
             min_length=min_length,
-            length_penalty=1.8,  # Slightly reduce the penalty to avoid cutting off too much
-            num_beams=6,  # Increase beam search to ensure a more coherent result
+            length_penalty=1.8,
+            num_beams=6,
             early_stopping=True,
-            no_repeat_ngram_size=4  # Prevent repeated phrases to avoid gibberish
+            no_repeat_ngram_size=4
         )
 
-        # Decode and return the summary
         summary = self.tokenizer.decode(summary_ids[0], skip_special_tokens=True)
         summary = summary.split("Summary:")[-1].strip()
         return summary
 
 
 if __name__ == "__main__":
-    # Example usage
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
