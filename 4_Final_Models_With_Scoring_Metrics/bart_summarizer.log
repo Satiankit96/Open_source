@@ -1,0 +1,111 @@
+2024-09-20 12:59:55,462 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 12:59:57,082 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 12:59:57,098 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 13:00:09,899 [INFO] Summary generated successfully.
+2024-09-20 13:00:09,899 [INFO] Using default tokenizer.
+2024-09-20 13:00:09,910 [ERROR] Error during summarization or scoring: "hypothesis" expects pre-tokenized hypothesis (Iterable[str]): China said its economy grew 5.3 per cent in the first quarter compared with the same three months a year earlier. The pick-up was propelled by a rise in industrial production and swelling investment in factories. Beijing is also seeking to stake out a commanding lead in newer hi-tech industries such as electric vehicles and renewable energy equipment. But there were also signs of the strategy’s limits. There was a growing mismatch between ballooning supply and lacklustre demand. Overall capacity utilisation fell 0.7 percentage points to 73.6 per cent, with steeper drops in industries including cars and electrical machinery. In February, inventories of finished products were 2.4 per cent larger than a yearEarlier. “It is a positive omen for the world economy that China seems to be getting past a rough patch,” said Eswar Prasad, professor of trade policy and economics at Cornell University.
+2024-09-20 13:37:43,623 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 13:37:45,240 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 13:37:45,256 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 13:37:56,614 [INFO] Summary generated successfully.
+2024-09-20 13:37:56,614 [INFO] Using default tokenizer.
+2024-09-20 13:37:56,624 [ERROR] Error during summarization or scoring: "hypothesis" expects pre-tokenized hypothesis (Iterable[str]): China said its economy grew 5.3 per cent in the first quarter compared with the same three months a year earlier. The pick-up was propelled by a rise in industrial production and swelling investment in factories. But there were also signs of the strategy’s limits. There was a growing mismatch between ballooning supply and lacklustre demand. Overall capacity utilisation fell 0.7 percentage points to 73.6 per cent, with steeper drops in industries including cars and electrical machinery. In February, inventories of finished products were 2.4 per cent larger than a yearEarlier. “It is a positive omen for the world economy that China seems to be getting past a rough patch,” said Eswar Prasad, professor of trade policy and economics at Cornell University.
+2024-09-20 13:40:32,844 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 13:40:34,511 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 13:40:34,528 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 13:40:49,361 [INFO] Summary generated successfully.
+2024-09-20 13:40:49,362 [INFO] Using default tokenizer.
+2024-09-20 13:40:49,376 [ERROR] Error during summarization or scoring: BLEU: `refs` should be a sequence of sequence of strings.
+2024-09-20 13:59:12,668 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 13:59:14,329 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 13:59:14,345 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 13:59:25,569 [INFO] Summary generated successfully.
+2024-09-20 13:59:25,569 [INFO] Using default tokenizer.
+2024-09-20 13:59:25,579 [ERROR] Error during summarization or scoring: BLEU: `refs` should be a sequence of sequence of strings.
+2024-09-20 14:03:02,691 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 14:03:04,343 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 14:03:04,358 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 14:03:17,254 [INFO] Summary generated successfully.
+2024-09-20 14:03:17,254 [INFO] Using default tokenizer.
+2024-09-20 14:03:17,265 [ERROR] Error during summarization or scoring: "hypothesis" expects pre-tokenized hypothesis (Iterable[str]): China said its economy grew 5.3 per cent in the first quarter compared with the same three months a year earlier. The pick-up was propelled by a rise in industrial production and swelling investment in factories. Beijing is also seeking to stake out a commanding lead in newer hi-tech industries such as electric vehicles and renewable energy equipment. But there were also signs of the strategy’s limits. There was a growing mismatch between ballooning supply and lacklustre demand. Overall capacity utilisation fell 0.7 percentage points to 73.6 per cent, with steeper drops in industries including cars and electrical machinery. In February, inventories of finished products were 2.4 per cent larger than a yearEarlier. “It is a positive omen for the world economy that China seems to be getting past a rough patch,” said Eswar Prasad, professor of trade policy and economics at Cornell University.
+2024-09-20 14:05:58,974 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 14:06:00,570 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 14:06:00,585 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 14:06:13,441 [INFO] Summary generated successfully.
+2024-09-20 14:06:13,453 [INFO] Using default tokenizer.
+2024-09-20 14:08:55,826 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 14:08:57,490 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 14:08:57,508 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 14:09:10,867 [INFO] Summary generated successfully.
+2024-09-20 14:09:10,880 [INFO] Using default tokenizer.
+2024-09-20 14:18:21,586 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 14:18:23,246 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 14:18:23,261 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 14:18:36,062 [INFO] Summary generated successfully.
+2024-09-20 14:18:36,076 [INFO] Using default tokenizer.
+2024-09-20 14:22:29,618 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 14:22:31,259 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 14:22:31,275 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 14:22:46,156 [INFO] Summary generated successfully.
+2024-09-20 14:22:46,170 [INFO] Using default tokenizer.
+2024-09-20 15:41:46,640 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 15:41:49,518 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 15:41:49,536 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 15:42:02,588 [INFO] Summary generated successfully.
+2024-09-20 15:42:02,601 [INFO] Using default tokenizer.
+2024-09-20 16:17:21,848 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 16:17:23,445 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 16:17:23,461 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 16:17:37,835 [INFO] Summary generated successfully.
+2024-09-20 16:17:37,858 [INFO] Using default tokenizer.
+2024-09-20 16:31:11,636 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 16:31:13,361 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 16:31:13,377 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 16:31:24,943 [INFO] Summary generated successfully.
+2024-09-20 16:31:24,943 [INFO] Using default tokenizer.
+2024-09-20 16:31:24,950 [ERROR] Error during summarization or scoring: BLEU: `refs` should be a sequence of sequence of strings.
+2024-09-20 16:31:59,604 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 16:32:01,159 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 16:32:01,175 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 16:32:17,573 [INFO] Summary generated successfully.
+2024-09-20 16:32:17,589 [INFO] Using default tokenizer.
+2024-09-20 17:05:14,091 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 17:05:15,701 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 17:05:15,717 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 17:05:31,130 [INFO] Summary generated successfully.
+2024-09-20 17:05:31,144 [INFO] Using default tokenizer.
+2024-09-20 17:11:27,802 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 17:11:29,911 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 17:11:29,935 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 17:11:45,790 [INFO] Summary generated successfully.
+2024-09-20 17:11:45,804 [INFO] Using default tokenizer.
+2024-09-20 17:12:12,694 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 17:12:14,993 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 17:12:15,014 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 17:12:33,006 [INFO] Summary generated successfully.
+2024-09-20 17:12:33,019 [INFO] Using default tokenizer.
+2024-09-20 22:27:00,943 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-20 22:27:03,623 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-20 22:27:03,644 [INFO] Text split into 1 chunks for summarization.
+2024-09-20 22:27:21,454 [INFO] Summary generated successfully.
+2024-09-20 22:27:21,468 [INFO] Using default tokenizer.
+2024-09-23 13:57:11,497 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-23 13:57:23,436 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-23 13:57:23,454 [INFO] Text split into 1 chunks for summarization.
+2024-09-23 13:57:54,955 [INFO] Summary generated successfully.
+2024-09-23 13:57:55,048 [INFO] Using default tokenizer.
+2024-09-23 14:10:32,368 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-23 14:10:42,139 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-23 14:10:42,170 [INFO] Text split into 1 chunks for summarization.
+2024-09-23 14:11:18,876 [INFO] Summary generated successfully.
+2024-09-23 14:11:18,964 [INFO] Using default tokenizer.
+2024-09-23 15:06:24,043 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-23 15:06:25,684 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-23 15:06:25,702 [INFO] Text split into 1 chunks for summarization.
+2024-09-23 15:07:08,072 [INFO] Summary generated successfully.
+2024-09-23 15:07:08,083 [INFO] Using default tokenizer.
+2024-09-24 11:04:26,559 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-24 11:04:29,222 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-24 11:04:29,240 [INFO] Text split into 1 chunks for summarization.
+2024-09-24 11:04:50,854 [INFO] Summary generated successfully.
+2024-09-24 11:04:50,892 [INFO] Using default tokenizer.
