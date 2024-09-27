@@ -1,23 +1,17 @@
-# Install necessary libraries if not already installed
 
-# Import necessary libraries
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 
-# Specify the model name for Tiny LLaMA
-model_name = "PY007/TinyLlama-1.1B-step-50K-105b"  # Replace with the correct model if available
+model_name = "PY007/TinyLlama-1.1B-step-50K-105b"
 
-# Specify the device (GPU if available, else CPU)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
-# Load the tokenizer and model from the Hugging Face model hub
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
-model.to(device)  # Move the model to the appropriate device
-model.eval()  # Set the model to evaluation mode
+model.to(device)
+model.eval()
 
-# Function to perform text summarization
 def summarize_text(text, max_new_tokens=150, min_length=30):
     """
     Summarizes the input text using Tiny LLaMA.
@@ -33,15 +27,13 @@ def summarize_text(text, max_new_tokens=150, min_length=30):
     if not isinstance(text, str) or len(text.strip()) == 0:
         raise ValueError("Input text must be a non-empty string.")
 
-    # Prepare the input prompt with a task-specific instruction
     input_text = f"Summarize the following article:\n\n{text.strip()}\n\nSummary:"
     inputs = tokenizer.encode(input_text, return_tensors="pt", truncation=True, max_length=2048)
-    inputs = inputs.to(device)  # Move inputs to the same device as the model
+    inputs = inputs.to(device)
 
-    # Generate the summary
     summary_ids = model.generate(
         inputs,
-        max_new_tokens=max_new_tokens,  # Generate up to `max_new_tokens` new tokens
+        max_new_tokens=max_new_tokens,
         min_length=min_length,
         length_penalty=2.0,
         num_beams=4,
@@ -49,13 +41,10 @@ def summarize_text(text, max_new_tokens=150, min_length=30):
         no_repeat_ngram_size=2
     )
 
-    # Decode and return the summary
     summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
-    # Extract the summary after the "Summary:" prompt
     summary = summary.split("Summary:")[-1].strip()
     return summary
 
-# Example usage
 article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
@@ -81,7 +70,6 @@ The number of cases filed by the Central Commission for Discipline Inspection, C
 Ms Teets found that a third of local officials would quit if they had the chance, so miserable were they in their jobs. To restore the private sector’s faith in policymaking, China must first restore the morale of its policymakers. Perhaps the Politburo can lead them in song.
 """
 
-# Generate the summary
 summary = summarize_text(article_text)
 print("Generated Summary:")
 print(summary)

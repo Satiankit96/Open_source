@@ -23,13 +23,12 @@ class TinyLlamaSummarizer:
             logging.info(f"Loading model {self.model_name} on {self.device}...")
             tokenizer = AutoTokenizer.from_pretrained(self.model_name)
 
-            # Set the EOS token as the pad token (Fix for missing pad token)
             if tokenizer.pad_token is None:
                 tokenizer.pad_token = tokenizer.eos_token
 
             model = AutoModelForCausalLM.from_pretrained(self.model_name).to(self.device)
 
-            model.eval()  # Set model to evaluation mode
+            model.eval()
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
         except Exception as e:
@@ -67,11 +66,11 @@ class TinyLlamaSummarizer:
             summary_ids = self.model.generate(
                 input_ids.to(self.device),
                 attention_mask=attention_mask.to(self.device),
-                max_new_tokens=int(max_length * 0.25),  # Reduce by 75%
-                length_penalty=3.0,  # Penalty for longer sequences, encouraging concise output
-                num_beams=3,  # Reduce the number of beams slightly
+                max_new_tokens=int(max_length * 0.25),
+                length_penalty=3.0,
+                num_beams=3,
                 early_stopping=True,
-                no_repeat_ngram_size=3  # Avoid repetition
+                no_repeat_ngram_size=3
             )
             return [self.tokenizer.decode(g, skip_special_tokens=True) for g in summary_ids]
 
@@ -86,14 +85,12 @@ class TinyLlamaSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Vectorize and batch inputs
         loader = self.preprocess([text], batch_size=1)
 
-        # Process the batch and return the summary
         for batch in loader:
             input_ids, attention_mask = batch
             summaries = self.summarize_batch(input_ids, attention_mask, max_length)
-            return summaries[0]  # Single text summarization
+            return summaries[0]
 
 def setup_logging():
     """
@@ -114,7 +111,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.

@@ -24,10 +24,9 @@ class TextSummarizer:
             tokenizer = T5Tokenizer.from_pretrained(self.model_name)
             model = T5ForConditionalGeneration.from_pretrained(self.model_name).to(self.device)
 
-            # Mixed precision for performance (fp16)
             if self.device == 'cuda':
                 model = model.half()
-            model.eval()  # Set model to evaluation mode
+            model.eval()
 
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
@@ -86,14 +85,12 @@ class TextSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Vectorize and batch inputs
         loader = self.preprocess([text], batch_size=1)
 
-        # Process the batch and return the summary
         for batch in loader:
             input_ids, attention_mask = batch
             summaries = self.summarize_batch(input_ids, attention_mask, max_length)
-            return summaries[0]  # Single text summarization
+            return summaries[0]
 
 def setup_logging():
     """
@@ -114,7 +111,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.

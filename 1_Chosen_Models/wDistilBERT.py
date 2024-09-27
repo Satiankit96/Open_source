@@ -5,7 +5,6 @@ import nltk
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
-# Download NLTK tokenizer models
 nltk.download('punkt')
 
 class DistilBERTSummarizer:
@@ -54,7 +53,6 @@ class DistilBERTSummarizer:
             inputs = self.tokenize_text(sentence)
             with torch.no_grad():
                 outputs = self.model(**inputs)
-                # Take the mean of the last hidden states to get sentence embeddings
                 embeddings.append(outputs.last_hidden_state.mean(dim=1).cpu().numpy())
         return np.vstack(embeddings)
 
@@ -62,23 +60,17 @@ class DistilBERTSummarizer:
         """
         Generate a summary by selecting the top N sentences based on similarity.
         """
-        # Tokenize the text into sentences
         sentences = nltk.sent_tokenize(text)
 
-        # Generate embeddings for each sentence
         sentence_embeddings = self.get_sentence_embeddings(sentences)
 
-        # Compute pairwise similarity with the first sentence (introductory sentence)
         similarity_matrix = cosine_similarity(sentence_embeddings)
 
-        # Rank sentences based on their similarity to the document (mean embedding)
         doc_embedding = np.mean(sentence_embeddings, axis=0).reshape(1, -1)
         scores = cosine_similarity(sentence_embeddings, doc_embedding).flatten()
 
-        # Rank the sentences by similarity score
         ranked_sentences_idx = np.argsort(scores, axis=0)[::-1]
 
-        # Select the top N sentences for summary
         top_sentence_indices = sorted(ranked_sentences_idx[:num_sentences])
 
         summary = ' '.join([sentences[i] for i in top_sentence_indices])
@@ -105,7 +97,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.

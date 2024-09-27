@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.tokenize import sent_tokenize
 
-# Download necessary NLTK data
 nltk.download('punkt')
 
 def preprocess_text(text):
@@ -96,25 +95,19 @@ def summarize_text(text, num_sentences=3, chunk_size=5):
     Returns:
         str: The summarized text.
     """
-    # Preprocess the text into sentences
     sentences = preprocess_text(text)
 
-    # Early return if the number of sentences is less than or equal to the requested summary length
     if len(sentences) <= num_sentences:
         return text
 
-    # Chunk the sentences
     sentence_chunks = list(chunk_sentences(sentences, chunk_size))
 
-    # Initialize a list to hold intermediate summaries of each chunk
     chunk_summaries = []
 
-    # Process each chunk and generate a summary using tqdm for progress tracking
     for chunk in tqdm(sentence_chunks, desc="Processing chunks"):
         chunk_summary = summarize_chunk(chunk, num_sentences)
         chunk_summaries.append(chunk_summary)
 
-    # Once each chunk is summarized, we summarize the summaries to produce the final summary
     final_summary = summarize_chunk(chunk_summaries, num_sentences)
 
     return final_summary

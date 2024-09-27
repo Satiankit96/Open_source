@@ -3,7 +3,6 @@ from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 import torch
 from torch.utils.data import DataLoader, Dataset
 
-# Enable GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -15,7 +14,7 @@ class TextSummarizer:
         """
         self.model_name = model_name
         self.model, self.tokenizer = self.load_model_and_tokenizer()
-        self.model.to(device)  # Move model to GPU if available
+        self.model.to(device)
 
     def load_model_and_tokenizer(self):
         """
@@ -44,7 +43,6 @@ class TextSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Tokenize and summarize the text
         logging.info("Tokenizing input text for summarization.")
         inputs = self.tokenizer(text, truncation=True, padding="longest", return_tensors="pt").to(device)
 
@@ -83,7 +81,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage: single article summarization
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.

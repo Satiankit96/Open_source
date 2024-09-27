@@ -60,7 +60,7 @@ class BARTSummarizer:
                 [prompt_text],
                 return_tensors="pt",
                 truncation=True,
-                max_length=self.chunk_size  # Make sure each chunk is within the token limit
+                max_length=self.chunk_size
             ).to(self.device)
 
             summary_ids = self.model.generate(
@@ -92,7 +92,6 @@ class BARTSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Chunk the input text if it's too long
         chunks = self.chunk_text(text)
 
         logging.info(f"Text split into {len(chunks)} chunks for summarization.")
@@ -120,7 +119,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
     China’s leaders have ambitious plans for the country’s economy, spanning one, five and even 15 years. In order to fulfil their goals, they know they will have to drum up prodigious amounts of manpower, materials and technology. But there is one vital input China’s leaders have recently struggled to procure: confidence.
 According to the National Bureau of Statistics, consumer confidence collapsed in April 2022 when Shanghai and other big cities were locked down to fight the covid-19 pandemic (see chart 1). It has yet to recover. Indeed, confidence declined again in July, according to the latest survey. The figure is so bad it is a wonder the government still releases it.
