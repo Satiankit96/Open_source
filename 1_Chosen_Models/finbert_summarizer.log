@@ -1,0 +1,4 @@
+2024-09-17 12:34:58,970 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 12:34:59,860 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 12:34:59,900 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 12:34:59,900 [INFO] Summary generated successfully.
