@@ -1,0 +1,16 @@
+2024-09-17 16:46:05,475 [INFO] Loading model ehsanaghaei/SecureBERT on cpu...
+2024-09-17 16:46:06,419 [INFO] Model ehsanaghaei/SecureBERT loaded successfully on cpu.
+2024-09-17 16:46:06,459 [INFO] Text split into 2 chunks for summarization.
+2024-09-17 16:46:06,510 [ERROR] Error during summarization: The expanded size of the tensor (519) must match the existing size (514) at non-singleton dimension 1.  Target sizes: [1, 519].  Tensor sizes: [1, 514]
+2024-09-17 16:49:19,665 [INFO] Loading model ehsanaghaei/SecureBERT on cpu...
+2024-09-17 16:49:20,568 [INFO] Model ehsanaghaei/SecureBERT loaded successfully on cpu.
+2024-09-17 16:49:20,593 [INFO] Text split into 2 chunks for summarization.
+2024-09-17 16:49:22,494 [INFO] Summary generated successfully.
+2024-09-17 16:56:29,640 [INFO] Loading model ehsanaghaei/SecureBERT on cpu...
+2024-09-17 16:56:30,477 [INFO] Model ehsanaghaei/SecureBERT loaded successfully on cpu.
+2024-09-17 16:56:30,501 [INFO] Text split into 2 chunks for summarization.
+2024-09-17 16:56:31,467 [INFO] Summary generated successfully.
+2024-09-17 17:01:09,743 [INFO] Loading model ehsanaghaei/SecureBERT on cpu...
+2024-09-17 17:01:11,073 [INFO] Model ehsanaghaei/SecureBERT loaded successfully on cpu.
+2024-09-17 17:01:11,101 [INFO] Text split into 2 chunks for summarization.
+2024-09-17 17:01:12,029 [INFO] Summary generated successfully.

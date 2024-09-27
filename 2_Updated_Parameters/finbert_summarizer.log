@@ -1,0 +1,40 @@
+2024-09-17 09:51:40,531 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 09:51:41,758 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 09:51:41,797 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 09:51:41,800 [INFO] Summary generated successfully.
+2024-09-17 10:03:23,743 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:03:25,028 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:03:25,069 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:03:25,072 [INFO] Summary generated successfully.
+2024-09-17 10:06:37,248 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:06:38,186 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:06:38,227 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:06:38,231 [INFO] Summary generated successfully.
+2024-09-17 10:07:40,648 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:07:41,433 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:07:41,473 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:07:41,476 [INFO] Summary generated successfully.
+2024-09-17 10:11:57,537 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:11:58,128 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:11:58,169 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:11:58,172 [INFO] Summary generated successfully.
+2024-09-17 10:13:54,740 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:13:55,249 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:13:55,297 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:13:55,300 [INFO] Summary generated successfully.
+2024-09-17 10:21:26,386 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:21:26,884 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:21:26,912 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:21:26,914 [INFO] Summary generated successfully.
+2024-09-17 10:22:52,430 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:22:53,024 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:22:53,025 [INFO] Text split into 1 chunks for summarization.
+2024-09-17 10:22:53,025 [INFO] Summary generated successfully.
+2024-09-17 10:23:20,734 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 10:23:21,484 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 10:23:21,506 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 10:23:21,506 [INFO] Summary generated successfully.
+2024-09-17 12:54:52,309 [INFO] Loading model yiyanghkust/finbert-tone on cpu...
+2024-09-17 12:54:53,013 [INFO] Model yiyanghkust/finbert-tone loaded successfully on cpu.
+2024-09-17 12:54:53,039 [INFO] Text split into 4 chunks for summarization.
+2024-09-17 12:54:53,040 [INFO] Summary generated successfully.

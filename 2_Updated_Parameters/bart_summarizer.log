@@ -1,0 +1,4 @@
+2024-09-17 10:38:42,000 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-17 10:38:43,527 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-17 10:38:43,556 [INFO] Text split into 2 chunks for summarization.
+2024-09-17 10:39:49,119 [INFO] Summary generated successfully.

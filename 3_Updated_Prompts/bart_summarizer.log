@@ -1,0 +1,108 @@
+2024-09-17 10:36:13,932 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-17 10:36:16,093 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-17 10:36:16,122 [INFO] Text split into 2 chunks for summarization.
+2024-09-17 10:37:06,589 [INFO] Summary generated successfully.
+2024-09-17 15:43:16,820 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-17 15:43:19,755 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-17 15:43:19,777 [INFO] Text split into 1 chunks for summarization.
+2024-09-17 15:43:33,827 [INFO] Summary generated successfully.
+2024-09-17 15:44:59,325 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-17 15:45:01,086 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-17 15:45:01,105 [INFO] Text split into 1 chunks for summarization.
+2024-09-17 15:45:14,445 [INFO] Summary generated successfully.
+2024-09-17 15:46:02,949 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-17 15:46:05,098 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-17 15:46:05,130 [INFO] Text split into 1 chunks for summarization.
+2024-09-17 15:46:18,578 [INFO] Summary generated successfully.
+2024-09-18 09:25:33,587 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 09:25:35,343 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 09:25:35,370 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 09:25:52,003 [INFO] Summary generated successfully.
+2024-09-18 09:44:05,998 [INFO] Loading summarization pipeline with model facebook/bart-large-cnn...
+2024-09-18 09:44:07,779 [INFO] Summarization pipeline loaded successfully.
+2024-09-18 09:44:07,779 [INFO] Generating summary using the pipeline...
+2024-09-18 09:44:07,789 [ERROR] Error during summarization: index out of range in self
+2024-09-18 09:44:41,671 [INFO] Loading summarization pipeline with model facebook/bart-large-cnn...
+2024-09-18 09:44:43,063 [INFO] Summarization pipeline loaded successfully.
+2024-09-18 09:44:43,064 [INFO] Generating summary using the pipeline...
+2024-09-18 09:44:43,074 [ERROR] Error during summarization: index out of range in self
+2024-09-18 09:46:42,051 [INFO] Loading summarization pipeline with model facebook/bart-large-cnn...
+2024-09-18 09:46:43,783 [INFO] Summarization pipeline loaded successfully.
+2024-09-18 09:46:43,783 [INFO] Generating summary using the pipeline...
+2024-09-18 09:46:55,671 [INFO] Summary generated successfully.
+2024-09-18 09:47:16,501 [INFO] Loading summarization pipeline with model facebook/bart-large-cnn...
+2024-09-18 09:47:17,862 [INFO] Summarization pipeline loaded successfully.
+2024-09-18 09:47:17,862 [INFO] Generating summary using the pipeline...
+2024-09-18 09:47:27,766 [INFO] Summary generated successfully.
+2024-09-18 09:51:41,855 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 09:51:44,302 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 09:51:44,335 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 09:51:57,986 [INFO] Summary generated successfully.
+2024-09-18 09:54:32,706 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 09:54:34,073 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 09:54:34,091 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 09:54:44,950 [INFO] Summary generated successfully.
+2024-09-18 09:56:01,494 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 09:56:02,999 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 09:56:03,019 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 09:56:13,903 [INFO] Summary generated successfully.
+2024-09-18 12:02:50,203 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 12:02:52,579 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 12:02:52,620 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 12:03:06,724 [INFO] Summary generated successfully.
+2024-09-18 12:08:00,506 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 12:08:02,997 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 12:08:03,074 [INFO] Text split into 2 chunks for summarization.
+2024-09-18 12:08:31,376 [INFO] Summary generated successfully.
+2024-09-18 12:36:07,013 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 12:36:08,863 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 12:36:08,896 [INFO] Text split into 2 chunks for summarization.
+2024-09-18 12:36:39,351 [INFO] Summary generated successfully.
+2024-09-18 13:19:59,793 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 13:20:02,429 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 13:20:02,460 [INFO] Text split into 2 chunks for summarization.
+2024-09-18 13:20:32,089 [INFO] Summary generated successfully.
+2024-09-18 15:03:41,769 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 15:03:43,409 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 15:03:43,428 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 15:03:54,925 [INFO] Summary generated successfully.
+2024-09-18 15:11:00,725 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 15:11:02,182 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 15:11:02,195 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 15:11:15,062 [INFO] Summary generated successfully.
+2024-09-18 15:14:04,776 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 15:14:06,232 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 15:14:06,251 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 15:14:18,578 [INFO] Summary generated successfully.
+2024-09-18 15:14:56,205 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-18 15:14:57,567 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-18 15:14:57,588 [INFO] Text split into 1 chunks for summarization.
+2024-09-18 15:15:12,530 [INFO] Summary generated successfully.
+2024-09-19 15:23:56,931 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 15:24:01,284 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 15:24:01,303 [INFO] Text split into 1 chunks for summarization.
+2024-09-19 15:24:35,041 [INFO] Summary generated successfully.
+2024-09-19 15:25:58,471 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 15:25:59,958 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 15:25:59,978 [INFO] Text split into 1 chunks for summarization.
+2024-09-19 15:26:38,110 [INFO] Summary generated successfully.
+2024-09-19 15:36:36,144 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 15:36:37,688 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 15:36:37,707 [INFO] Text split into 1 chunks for summarization.
+2024-09-19 15:37:16,256 [INFO] Summary generated successfully.
+2024-09-19 15:39:31,741 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 15:39:33,470 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 15:39:33,489 [INFO] Text split into 1 chunks for summarization.
+2024-09-19 15:40:11,985 [INFO] Summary generated successfully.
+2024-09-19 15:46:50,173 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 15:46:51,782 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 15:46:51,792 [INFO] Text split into 1 chunks for summarization.
+2024-09-19 15:47:26,585 [INFO] Summary generated successfully.
+2024-09-19 15:59:29,325 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 15:59:30,723 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 15:59:30,757 [INFO] Text split into 2 chunks for summarization.
+2024-09-19 16:00:17,247 [INFO] Summary generated successfully.
+2024-09-19 16:09:45,906 [INFO] Loading model facebook/bart-large-cnn on cpu...
+2024-09-19 16:09:47,713 [INFO] Model facebook/bart-large-cnn loaded successfully on cpu.
+2024-09-19 16:09:47,730 [INFO] Text split into 1 chunks for summarization.
+2024-09-19 16:10:24,072 [INFO] Summary generated successfully.
