@@ -14,11 +14,9 @@ class FinBERTSummarizer:
         """
         self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
 
-        # Load FinBERT for sentiment classification (financial sentiment extraction)
         self.finbert_tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.finbert_model = AutoModelForSequenceClassification.from_pretrained(model_name).to(self.device)
 
-        # Load BART for summarization
         self.summarizer_tokenizer = AutoTokenizer.from_pretrained(summarizer_model)
         self.summarizer_model = AutoModelForSeq2SeqLM.from_pretrained(summarizer_model).to(self.device)
         self.max_input_length = max_input_length
@@ -42,16 +40,15 @@ class FinBERTSummarizer:
         Returns:
             A list of key sentences based on sentiment analysis.
         """
-        sentences = text.split('.')  # Simplistic sentence splitting (you can use better sentence tokenizers like `nltk`)
+        sentences = text.split('.')
 
         key_sentences = []
         for sentence in sentences:
             inputs = self.finbert_tokenizer(sentence, return_tensors="pt", truncation=True, padding=True, max_length=512).to(self.device)
             outputs = self.finbert_model(**inputs)
-            sentiment = torch.softmax(outputs.logits, dim=1)  # Get sentiment scores
+            sentiment = torch.softmax(outputs.logits, dim=1)
 
-            # Check if the sentence has positive or neutral sentiment
-            if sentiment[0][1].item() > threshold or sentiment[0][2].item() > threshold:  # Neutral or Positive
+            if sentiment[0][1].item() > threshold or sentiment[0][2].item() > threshold:
                 key_sentences.append(sentence)
 
         return key_sentences
@@ -68,18 +65,14 @@ class FinBERTSummarizer:
         Returns:
             The generated summary.
         """
-        # First, extract key sentences using FinBERT
         key_sentences = self.extract_key_sentences(text)
         if not key_sentences:
             return "No relevant sentences found based on sentiment."
 
-        # Combine the key sentences and strongly integrate the prompt to guide the summary
         key_text = ' '.join(key_sentences)
 
-        # Use the prompt as a strong prefix in multiple locations to enforce its influence
-        prompt_text = f"Focus on the following key theme: {prompt}\n\n" + key_text  # Strong prompt influence
+        prompt_text = f"Focus on the following key theme: {prompt}\n\n" + key_text
 
-        # Tokenize and generate the summary
         inputs = self.summarizer_tokenizer(prompt_text, return_tensors="pt", truncation=True, max_length=self.max_input_length).to(self.device)
 
         summary_ids = self.summarizer_model.generate(
@@ -94,7 +87,6 @@ class FinBERTSummarizer:
 
         summary = self.summarizer_tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
-        # Perform sentiment analysis on the generated summary
         sentiment_analysis = self.analyze_sentiment(summary)
 
         return summary, sentiment_analysis
@@ -109,18 +101,16 @@ class FinBERTSummarizer:
         """
         inputs = self.finbert_tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=512).to(self.device)
         outputs = self.finbert_model(**inputs)
-        sentiment = torch.softmax(outputs.logits, dim=1)  # Get sentiment scores
+        sentiment = torch.softmax(outputs.logits, dim=1)
 
         sentiment_scores = sentiment[0].tolist()
         sentiment_labels = ["Negative", "Neutral", "Positive"]
 
-        # Return the sentiment with the highest score
         sentiment_result = sentiment_labels[sentiment_scores.index(max(sentiment_scores))]
 
         return sentiment_result
 
 
-# Example usage
 
 class SummarizationPipeline:
     def __init__(self, finbert_model="yiyanghkust/finbert-tone", summarizer_model="facebook/bart-large-cnn", max_input_length=512, device=None):
@@ -148,10 +138,8 @@ class SummarizationPipeline:
         print("Sentiment Analysis:", sentiment)
 
 
-# Initialize the pipeline
 pipeline = SummarizationPipeline()
 
-# Example news article for summarization
 news_article =  """
 Abu Dhabi: Against the backdrop of a spike in cyber attacks globally, the UAE Cyber Security Council has warned users that criminals are using faster and more targeted techniques to hack users’ devices.
 Speaking to Gulf News, Dr Mohamed Al Kuwaiti, the Council’s chairman, said that the Council had recently alerted users of several vulnerabilities in the operating systems of the devices of major international companies, allowing the attacker to control the devices.
@@ -181,5 +169,4 @@ UAE takes action
 This message is confidential and subject to terms at: https://www.jpmorgan.com/emaildisclaimer including on confidential, privileged or legal entity information, malicious content and monitoring of electronic messages. If you are not the intended recipient, please delete this message and notify the sender immediately. Any unauthorized use is strictly prohibited.
 """
 
-# Summarize a single article with the specified prompt and get sentiment analysis
 pipeline.run_single_summary(news_article, prompt="Summarize the article below")

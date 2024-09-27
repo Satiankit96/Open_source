@@ -5,7 +5,6 @@ from nltk.tokenize import sent_tokenize
 from tqdm import tqdm
 import logging
 
-# Download the required NLTK package
 nltk.download('punkt')
 
 class PegasusSummarizer:
@@ -29,7 +28,6 @@ class PegasusSummarizer:
             raise RuntimeError("Error loading model or tokenizer.") from e
 
     def preprocess_text(self, text: str):
-        # Basic text cleaning for improved performance
         sentences = sent_tokenize(text)
         cleaned_text = ' '.join([sentence.strip() for sentence in sentences if sentence.strip()])
         return cleaned_text
@@ -37,7 +35,6 @@ class PegasusSummarizer:
     def summarize_text(self, text: str, num_beams: int = 4, repetition_penalty: float = 1.2):
         preprocessed_text = self.preprocess_text(text)
 
-        # Check if preprocessed text is empty or too short
         if not preprocessed_text or len(preprocessed_text.split()) < 5:
             logging.warning(f"Text is too short or empty: {preprocessed_text}")
             return "Text too short for summarization."
@@ -51,7 +48,6 @@ class PegasusSummarizer:
                 max_length=self.max_length
             ).to(self.device)
 
-            # Verify input dimensions
             if inputs['input_ids'].shape[1] == 0:
                 logging.error("Tokenization resulted in empty input IDs. Skipping summarization.")
                 return "Error during summarization."
@@ -123,7 +119,6 @@ def main():
         summaries = summarize_article_batch(articles, num_beams=4, max_length=1024, min_length=50)
         logging.info("Summarization completed.")
 
-        # Display the summaries
         for i, summary in enumerate(summaries):
             print(f"Summary {i+1}:")
             print(summary)

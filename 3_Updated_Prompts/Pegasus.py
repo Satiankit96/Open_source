@@ -6,7 +6,6 @@ import torch
 import re
 from nltk.corpus import stopwords
 
-# Enable GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class TextSummarizer:
@@ -17,8 +16,8 @@ class TextSummarizer:
         """
         self.model_name = model_name
         self.model, self.tokenizer = self.load_model_and_tokenizer()
-        self.model.to(device)  # Move model to GPU if available
-        self.stop_words = set(stopwords.words('english'))  # Stopwords for cleaning
+        self.model.to(device)
+        self.stop_words = set(stopwords.words('english'))
 
     def load_model_and_tokenizer(self):
         """
@@ -43,13 +42,12 @@ class TextSummarizer:
         """
         logging.info("Cleaning summary to remove filler words...")
         filler_phrases = [
-            r'\b(for more than a decade|as a consequence|writes [\w\s]+,)\b',  # Example fillers
+            r'\b(for more than a decade|as a consequence|writes [\w\s]+,)\b',
             r'\b(according to [\w\s]+|in the opinion of)\b'
         ]
         for phrase in filler_phrases:
             summary = re.sub(phrase, '', summary)
 
-        # Remove excessive whitespace
         summary = re.sub(r'\s+', ' ', summary).strip()
         return summary
 
@@ -66,10 +64,8 @@ class TextSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Incorporate the thematic prompt into the input
         text_with_prompt = f"{prompt}: {text}"
 
-        # Tokenize and summarize the text
         logging.info("Tokenizing input text for summarization.")
         inputs = self.tokenizer(text_with_prompt, truncation=True, padding="longest", return_tensors="pt").to(device)
 
@@ -78,9 +74,9 @@ class TextSummarizer:
             inputs['input_ids'],
             max_length=max_length,
             min_length=min_length,
-            length_penalty=2.0,  # Slightly lower penalty to allow for more coverage
-            num_beams=5,  # Increased beam search for more diversity
-            no_repeat_ngram_size=3,  # Avoid repetition of key phrases
+            length_penalty=2.0,
+            num_beams=5,
+            no_repeat_ngram_size=3,
             temperature=0.5,
             do_sample=True,
             early_stopping=True
@@ -110,10 +106,8 @@ def main():
     """
     setup_logging()
 
-    # Define the prompt
     prompt = "Summarize the article below"
 
-    # Example usage: single article summarization
     article_text = """
 China’s economy picked up pace in the first quarter as Beijing’s plan to boost growth by pouring money into factories began to show results.
 But that approach is leading to a lopsided recovery and stoking trade tensions overseas, with Western governments and some big emerging economies crying foul over a growing wave of cheap Chinese imports they say threatens domestic jobs and industries.

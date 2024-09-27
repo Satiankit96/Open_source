@@ -3,7 +3,6 @@ import torch
 from transformers import T5ForConditionalGeneration, T5Tokenizer, BartForConditionalGeneration, BartTokenizer
 import evaluate
 
-# Scoring Metrics
 sacrebleu = evaluate.load("sacrebleu")
 bleu = evaluate.load("bleu")
 meteor = evaluate.load("meteor")
@@ -103,7 +102,6 @@ class SummarizationEvaluator:
         references = [[ground_truth]]
         predictions = [generated_summary]
 
-        # Calculate SacreBLEU, BLEU, and METEOR scores
         sacrebleu_score = sacrebleu.compute(predictions=predictions, references=references)['score']
         bleu_score = bleu.compute(predictions=predictions, references=references)['bleu']
         meteor_score = meteor.compute(predictions=predictions, references=references)['meteor']
@@ -133,7 +131,6 @@ def main():
     """
     setup_logging()
 
-    # Example text input
     article_text = """
 China’s economy picked up pace in the first quarter as Beijing’s plan to boost growth by pouring money into factories began to show results.
 But that approach is leading to a lopsided recovery and stoking trade tensions overseas, with Western governments and some big emerging economies crying foul over a growing wave of cheap Chinese imports they say threatens domestic jobs and industries.
@@ -149,19 +146,14 @@ Tuesday’s data laid out in detail the fruits of Beijing’s strategy, with ind
 But there were also signs of the strategy’s limits. There was a growing mismatch between ballooning supply and lacklustre demand, with China’s factories reporting a fall in the amount of available production capacity they are using. Overall capacity utilisation fell 0.7 percentage points in the first quarter to 73.6 per cent, with steeper drops in industries including cars and electrical machinery. In February, inventories of finished products were 2.4 per cent larger than a year earlier. “It is a positive omen for the world economy that China seems to be getting past a rough patch. However, these data will not ­assuage concerns that a production-led recovery and weak consumption demand could lead China to aggressively push exports to keep its recovery going,” said Eswar Prasad, professor of trade policy and economics at Cornell University and a former head of the IMF’s China division.
 """
     try:
-        # Initialize the summarizer and evaluator
         evaluator = SummarizationEvaluator(t5_model_name="t5-large", bart_model_name="facebook/bart-large-cnn")
 
-        # Generate T5 summary
         generated_summary = evaluator.summarize_t5(article_text, custom_prompt="Summarize from the perspective of a risk manager")
 
-        # Generate BART ground truth
         ground_truth_summary = evaluator.generate_ground_truth(article_text)
 
-        # Evaluate using SacreBLEU, BLEU, and METEOR
         scores = evaluator.evaluate(generated_summary, ground_truth_summary)
 
-        # Output the results
         print("Generated Summary:")
         print(generated_summary)
         print("\nGround Truth Summary (BART):")

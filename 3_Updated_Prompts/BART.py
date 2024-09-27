@@ -25,7 +25,7 @@ class BARTSummarizer:
             logging.info(f"Loading model {self.model_name} on {self.device}...")
             tokenizer = BartTokenizer.from_pretrained(self.model_name)
             model = BartForConditionalGeneration.from_pretrained(self.model_name).to(self.device)
-            model.eval()  # Set model to evaluation mode
+            model.eval()
             logging.info(f"Model {self.model_name} loaded successfully on {self.device}.")
             return model, tokenizer
         except Exception as e:
@@ -41,8 +41,7 @@ class BARTSummarizer:
         inputs = self.tokenizer([text], return_tensors="pt", truncation=False).to(self.device)
         token_ids = inputs['input_ids'][0]
 
-        # Split token_ids into smaller chunks
-        chunks = torch.split(token_ids, self.chunk_size - 10)  # Reserve 10 tokens for special tokens
+        chunks = torch.split(token_ids, self.chunk_size - 10)
         return [self.tokenizer.decode(chunk, skip_special_tokens=True) for chunk in chunks]
 
     def summarize_chunks(self, chunks: list, prompt: str, max_length: int = 350, min_length: int = 150) -> str:
@@ -62,16 +61,16 @@ class BARTSummarizer:
                 [prompt_text],
                 return_tensors="pt",
                 truncation=True,
-                max_length=self.chunk_size  # Make sure each chunk is within the token limit
+                max_length=self.chunk_size
             ).to(self.device)
 
             summary_ids = self.model.generate(
                 inputs['input_ids'],
                 max_length=max_length,
                 min_length=min_length,
-                length_penalty=2.5,  # Encourage more focused summaries
-                repetition_penalty=2.0,  # Avoid repetition
-                num_beams=6,  # Improve selection of coherent sentences
+                length_penalty=2.5,
+                repetition_penalty=2.0,
+                num_beams=6,
                 temperature=0.5,
                 do_sample=True,
                 early_stopping=True
@@ -80,7 +79,6 @@ class BARTSummarizer:
             summary = self.tokenizer.decode(summary_ids[0], skip_special_tokens=True)
             summaries.append(summary)
 
-        # Combine all chunk summaries
         return " ".join(summaries).strip()
 
     def summarize_text(self, text: str, prompt: str, max_length: int = 350, min_length: int = 150) -> str:
@@ -97,7 +95,6 @@ class BARTSummarizer:
             logging.error("Invalid input: Input text must be a non-empty string.")
             raise ValueError("Input text must be a non-empty string.")
 
-        # Chunk the input text if it's too long
         chunks = self.chunk_text(text)
 
         logging.info(f"Text split into {len(chunks)} chunks for summarization.")
@@ -125,7 +122,6 @@ def main():
     """
     setup_logging()
 
-    # Example usage with a text to summarize
     article_text = """
 China’s economy picked up pace in the first quarter as Beijing’s plan to boost growth by pouring money into factories began to show results.
 But that approach is leading to a lopsided recovery and stoking trade tensions overseas, with Western governments and some big emerging economies crying foul over a growing wave of cheap Chinese imports they say threatens domestic jobs and industries.
@@ -144,10 +140,8 @@ But there were also signs of the strategy’s limits. There was a growing mismat
     try:
         summarizer = BARTSummarizer(model_name="facebook/bart-large-cnn")
 
-        # Prompt to guide the summary generation from the perspective of a risk manager at a global bank
         prompt = "Summarize the article below : "
 
-        # Generate the cumulative summary based on the prompt
         combined_summary = summarizer.summarize_text(article_text, prompt)
         print("Summarize the article Below")
         print(combined_summary)
